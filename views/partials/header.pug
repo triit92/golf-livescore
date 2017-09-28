@@ -22,9 +22,9 @@
       ul.nav.navbar-nav.navbar-right
         if !user
           li(class=(title === 'Login') ? 'active' : undefined)
-            a(href='/login') Login
+            a(href='/user/login') Login
           li(class=(title === 'Create Account') ? 'active' : undefined)
-            a(href='/signup') Create Account
+            a(href='/user/signup') Create Account
         else
           li.dropdown(class=(title === 'Account Management') ? 'active' : undefined)
             a.dropdown-toggle(href='#', data-toggle='dropdown')
@@ -39,4 +39,4 @@
                 a(href='/account') My Account
               li.divider
               li
-                a(href='/logout') Logout
+                a(href='/user/logout') Logout
