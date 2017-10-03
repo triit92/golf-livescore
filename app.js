@@ -40,7 +40,7 @@ const contactController = require('./backend/contact/contact.controller');
 /**
  * API keys and Passport configuration.
  */
-const passportConfig = require('./config/passport');
+const passportConfig = require('./backend/common/passport');
 
 /**
  * Create Express server.
