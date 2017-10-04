@@ -4,6 +4,10 @@ const express = require('express');
 const contactRoute = require('../contact/contact.route');
 const homeRoute = require('../home/home.route');
 const userRoute = require('../user/user.route');
+const golferRoute = require('../golfer/golfer.route');
+const matchRoute = require('../match/match.route');
+const tournamentRoute = require('../tournament/tournament.route');
+
 const publicGetRoute = require('./public.get.route');
 const publicPostRoute = require('./public.post.route');
 
@@ -34,6 +38,8 @@ module.exports = (app) => {
   app.use('/', homeRoute);
   app.use('/user', userRoute);
   app.use('/contact', contactRoute);
-
+  app.use('/golfer', golferRoute);
+  app.use('/match', matchRoute);
+  app.use('/tournament', tournamentRoute);
   
 }

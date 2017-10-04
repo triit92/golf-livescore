@@ -1,0 +1,63 @@
+
+extends ../layout
+
+block content
+  .page-header
+    h3 Create Match
+  .row
+    .col-sm-6
+      p Upload Golfer avatar
+      form(id='myFile', role='form', enctype='multipart/form-data', action='/api/upload', method='POST')
+        .form-group
+          label.control-label File Input
+          input(type='file', name='myFile')
+        button.btn.btn-primary(type='submit') Submit
+  //- input#fileupload(type='file', name='files[]', data-url='/api/upload', multiple='')
+
+  form.form-horizontal(id='signup-form', method='POST')
+    input(type='hidden', name='_csrf', value=_csrf)
+    .form-group
+      label.col-sm-3.control-label(for='email') Họ tên
+      .col-sm-7
+        input.form-control(type='email', name='email', id='email', placeholder='Email', autofocus, required)
+    .form-group
+      label.col-sm-3.control-label(for='password') Giới tính
+      .col-sm-7
+        input.form-control(type='password', name='password', id='password', placeholder='Password', required)
+    .form-group
+      label.col-sm-3.control-label(for='confirmPassword') Trình độ
+      .col-sm-7
+        input.form-control(type='password', name='confirmPassword', id='confirmPassword', placeholder='Confirm Password', required)
+    .form-group
+      .col-sm-offset-3.col-sm-7
+        button.btn.btn-success(type='submit')
+          i.fa.fa-user-plus
+          | Signup
+  script(src='/js/lib/jquery.iframe-transport.js')
+  script(src='/js/lib/jquery.fileupload.js')
+  script.
+    jQuery(document).ready(function($){
+      $("input[name='myFile']").change(function() { 
+        var formData = new FormData('#myFile');
+        //- formData.append('section', 'general');
+        //- formData.append('action', 'previewImg');
+        //- formData.append('image', $("input[name='myFile']")[0].files[0]);
+        console.log(formData);
+        $.ajax({
+          url : '/api/upload',
+          type : 'POST',
+          data : $('#myFile').serialize(),
+          contentType: 'multipart/form-data',
+          async: true,
+          cache: false,
+          processData: false,  // tell jQuery not to process the data
+          contentType: false,  // tell jQuery not to set contentType
+          timeout: 60000,
+          success : function(data) {
+            console.log(data);
+          }
+        });
+      });      
+    });
+    
+    
