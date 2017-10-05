@@ -1,6 +1,6 @@
 const Match = require('./match.model');
-
-module.exports = {
+const _ = require('underscore')
+const matchDAO = {
   getById: (matchId, callback) => {
     Match.findById(matchId, (err, match) => {
       return callback(err, match);
@@ -25,7 +25,22 @@ module.exports = {
     })
   },
 
-  updateScore: (scoreData, callback) => {
+  updateScore: (matchId, data, callback) => {
+    matchDAO.getById(matchId, (err, result) => {
+      if(err){
+        //TODO return err
+        return err
+      }
+      if(!result){
+        //todo return result not found from dao
 
+      }
+      _.extend(result.golfer, data);
+      result.save((err) => {
+        return callback(err);
+      })
+    })
   }
 }
+
+module.exports = matchDAO;

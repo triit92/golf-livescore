@@ -11,5 +11,9 @@ module.exports = {
 
   createNewMatchInTournament: (matchData, callback) => {
     return matchDAO.createNewMatchInTournament(matchData, callback);
+  },
+
+  updateScore: (matchId, data, callback) => {
+    return matchDAO.updateScore(matchId, data, callback);
   }
 }

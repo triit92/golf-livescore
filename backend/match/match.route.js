@@ -10,5 +10,5 @@ router.get('/update-score/:matchId', matchController.renderUpdateScore);
 
 router.post('/create/:tournamentId', matchController.createNewMatchInTournament);
 
-// router.Post('/update-score/:matchId', matchController.renderUpdateScore);
+router.post('/update-score/:matchId', matchController.updateScore);
 module.exports = router;

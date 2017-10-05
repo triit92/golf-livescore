@@ -26,6 +26,23 @@ module.exports = {
     })
   },
 
+  updateScore: (req, res) => {
+    let matchId = req.params.matchId;
+    let data = req.body.score;
+    console.log(data);
+    //TODO validate input
+    matchService.updateScore(matchId, data, (err, result) => {
+      console.log(err);
+      console.log(result);
+      if(err){
+        req.flash('error', { msg: 'An error when update score of match!' });
+        return res.redirect('/match/update-score/' + matchId);
+      }
+      req.flash('success', { msg: 'update match score successfully.' });
+      return res.redirect('/match/update-score/' + matchId);
+    })
+  },
+
   createNewMatchInTournament: (req, res) => {
     let tournamentId = req.params.tournamentId;
 

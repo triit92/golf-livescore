@@ -10,6 +10,7 @@ block content
 		h2 Trận #{match.name}
 		h3 Update Score
 	.row
+		input(type='hidden', name='_csrf', value=_csrf)
 		.col-sm-12
 			table#mainTable.table.table-striped
 				thead
@@ -22,7 +23,7 @@ block content
 						th Par
 						each val, index in match.par
 							th= val
-				tbody
+				tbody(id="data-score")
 					each val, index in match.golfer
 						tr(id=val.golfer_id._id)
 							td= val.golfer_id.name
@@ -36,13 +37,13 @@ block content
 				.form-group
 					label.col-sm-3.control-label(for='team')= val.golfer_id.name
 					.col-sm-12
-						select(name='team')
+						select(name='team', id='team-select-' + val.golfer_id._id)
 							option(value='1') Team 1
 							option(value='2') Team 2
 	br
 	.row
 		.col-sm-12
-			button.btn.btn-success(onclick="updateMatchScore()")
+			button.btn.btn-success(onclick="updateMatchScore(\"" + match._id + "\");")
 				i.fa.fa-plus-square-o
 				| Cập nhật điểm
 	script(src='https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js')

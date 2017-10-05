@@ -60,6 +60,7 @@
     "tumblr.js": "^1.1.1",
     "twilio": "^3.6.3",
     "twit": "^2.2.9",
+    "underscore": "^1.8.3",
     "validator": "^8.0.0"
   },
   "devDependencies": {
