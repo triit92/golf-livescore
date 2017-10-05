@@ -7,6 +7,17 @@ module.exports = {
     })
   },
 
+  getByIdWithPopulate: (matchId, callback) => {
+    Match.findById(matchId)
+      .populate([
+        {path: 'golfer.golfer_id', model: 'Golfer', select: '_id name avatar'}
+      ])
+      .lean()
+      .exec((err, match) => {
+        return callback(err, match);
+      })
+  },
+
   createNewMatchInTournament: (matchData, callback) => {
     let newMatch = new Match(matchData);
     newMatch.save((err) => {
@@ -15,6 +26,6 @@ module.exports = {
   },
 
   updateScore: (scoreData, callback) => {
-    
+
   }
 }

@@ -1,0 +1,52 @@
+extends ../layout
+
+block content
+
+	link(href='https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/css/select2.min.css', rel='stylesheet')
+	script(src='https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/js/select2.min.js')
+	script(src='/js/lib/mindmup-editabletable.js')
+	script(src='/js/lib/numeric-input-example.js')
+	.page-header
+		h2 Trận #{match.name}
+		h3 Update Score
+	.row
+		.col-sm-12
+			table#mainTable.table.table-striped
+				thead
+					tr
+						th Hố
+						each val, index in match.par
+							th= index + 1
+				thead
+					tr
+						th Par
+						each val, index in match.par
+							th= val
+				tbody
+					each val, index in match.golfer
+						tr(id=val.golfer_id._id)
+							td= val.golfer_id.name
+							each score, indexScore in match.par
+								if match.golfer[index].result[indexScore]
+									td= match.golfer[index].result[indexScore]
+								else 
+									td= 0
+		if match.type && match.type > 1
+			each val, index in match.golfer
+				.form-group
+					label.col-sm-3.control-label(for='team')= val.golfer_id.name
+					.col-sm-12
+						select(name='team')
+							option(value='1') Team 1
+							option(value='2') Team 2
+	br
+	.row
+		.col-sm-12
+			button.btn.btn-success(onclick="updateMatchScore()")
+				i.fa.fa-plus-square-o
+				| Cập nhật điểm
+	script(src='https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js')
+	script
+		include updateScore.js
+		
+		

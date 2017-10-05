@@ -11,8 +11,19 @@ module.exports = {
 
       //TODO check error and return 
 
-      return res.render('match/createMatch', {match: result});
+      return res.render('match/createMatch', {tournament: result});
     });
+  },
+
+  renderUpdateScore: (req, res) => {
+    let matchId = req.params.matchId;
+    matchService.getByIdWithPopulate(matchId, (err, result) => {
+      console.log(result);
+      
+      //TODO check error and return 
+      return res.render('match/updateScore', { match: result});
+      // return res.json(result);
+    })
   },
 
   createNewMatchInTournament: (req, res) => {
@@ -23,9 +34,11 @@ module.exports = {
     let teeTime = req.body.teeTime;
     let par = req.body.par;
     let member = req.body.member;
+    let type = req.body.type;
 
     //TODO validate input
-
+    console.log("----------------------")
+    console.log(member);
 
     tournamentService.getById(tournamentId, (err, result) => {
       console.log(result);
@@ -34,10 +47,11 @@ module.exports = {
       let parArray = par.split(',');
       let newMatch = {
         name: name,
+        type: type,
         time: new Date(time),
         tee_time: teeTime,
         par: parArray,
-        member: member,
+        golfer: member.split(',').map((x) => {return { golfer_id: x}}),
         tournament_id: tournamentId
       }
 

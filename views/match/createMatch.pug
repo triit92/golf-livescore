@@ -6,7 +6,7 @@ block content
   script(src='https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/js/select2.min.js')
 
   .page-header
-    h2 Giải đấu #{match.name}
+    h2 Giải đấu #{tournament.name}
     h3 Create Match
   .row
     .col-sm-6
@@ -28,6 +28,13 @@ block content
       .col-sm-7
         input.form-control(type='text', name='name', id='name', placeholder='Tên trận đấu', autofocus, required)
 
+    .form-group
+      label.col-sm-3.control-label(for='type') Thể loại
+      .col-sm-7
+        select(name='type')
+          option(value='1') Thường
+          option(value='2') Single
+          option(value='3') Foursomes
     .form-group
       label.col-sm-3.control-label(for='time') Thời gian
       .col-sm-7

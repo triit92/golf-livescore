@@ -6,9 +6,10 @@ const matchSchema = new mongoose.Schema({
   tournament_id: { type: mongoose.Schema.Types.ObjectId, ref: 'Tournament', require: true},
   tee_time: String,
   par: [{ type: Number }],
+  type: { type: Number, default: 1, require: true},   // 1: normal 2: single match, 3: foursome
   golfer: [{
     golfer_id: { type: mongoose.Schema.Types.ObjectId, ref: 'Golfer', require: true},
-    team: { type: Number, require: true },
+    team: { type: Number },
     result: [{ type: Number }]
   }]
 }, { timestamps: { 
