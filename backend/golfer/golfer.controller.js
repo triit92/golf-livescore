@@ -3,7 +3,7 @@ const golferService = require('./golfer.service');
 
 
 module.exports = {
-  renerCreate: (req, res) => {
+  renderCreate: (req, res) => {
     return res.render('golfer/createGolfer');
   },
 

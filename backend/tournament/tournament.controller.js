@@ -1,7 +1,7 @@
 const tournamentService = require('./tournament.service');
 
 module.exports = {
-  renerCreate: (req, res) => {
+  renderCreate: (req, res) => {
     return res.render('tournament/createTournament');
   },
 

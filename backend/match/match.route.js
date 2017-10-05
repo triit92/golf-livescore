@@ -4,7 +4,7 @@ const router = express.Router();
 const matchController = require('./match.controller');
 
 
-router.get('/create', matchController.renerCreate);
+router.get('/create/:tournamentId', matchController.renderCreate);
 
-
+router.post('/create/:tournamentId', matchController.createNewMatchInTournament);
 module.exports = router;

@@ -1,63 +1,75 @@
-
 extends ../layout
 
 block content
+
+  link(href='https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/css/select2.min.css', rel='stylesheet')
+  script(src='https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/js/select2.min.js')
+
   .page-header
+    h2 Giải đấu #{match.name}
     h3 Create Match
   .row
     .col-sm-6
-      p Upload Golfer avatar
+      p Upload Tournament logo
+      <img id="golferAvar" src="/image/simple.png" style="max-width: 300px;" alt="Mountain View">
       form(id='myFile', role='form', enctype='multipart/form-data', action='/api/upload', method='POST')
         .form-group
           label.control-label File Input
           input(type='file', name='myFile')
-        button.btn.btn-primary(type='submit') Submit
+        //- button.btn.btn-primary(type='submit') Submit
   //- input#fileupload(type='file', name='files[]', data-url='/api/upload', multiple='')
 
   form.form-horizontal(id='signup-form', method='POST')
     input(type='hidden', name='_csrf', value=_csrf)
+    input(type='hidden', name='userAvatar', value='')
+    input(type='hidden', name='member', value='')
     .form-group
-      label.col-sm-3.control-label(for='email') Họ tên
+      label.col-sm-3.control-label(for='name') Tên trận đấu
       .col-sm-7
-        input.form-control(type='email', name='email', id='email', placeholder='Email', autofocus, required)
+        input.form-control(type='text', name='name', id='name', placeholder='Tên trận đấu', autofocus, required)
+
     .form-group
-      label.col-sm-3.control-label(for='password') Giới tính
+      label.col-sm-3.control-label(for='time') Thời gian
       .col-sm-7
-        input.form-control(type='password', name='password', id='password', placeholder='Password', required)
+        input.form-control(type='date', name='time', id='time', placeholder='Thời gian')
+
     .form-group
-      label.col-sm-3.control-label(for='confirmPassword') Trình độ
+      label.col-sm-3.control-label(for='teeTime') Tee time
       .col-sm-7
-        input.form-control(type='password', name='confirmPassword', id='confirmPassword', placeholder='Confirm Password', required)
+        input.form-control(type='text', name='teeTime', id='teeTime', placeholder='Tee time')
+
     .form-group
-      .col-sm-offset-3.col-sm-7
+      label.col-sm-3.control-label(for='info') Par
+      .col-sm-7
+        input.form-control(type='text', name='par', id='par', placeholder='Par')
+
+    .form-group
+      label.col-sm-3.control-label(for='member') Golfer tham gia
+      .col-sm-7
+        ul.list-group.member-list
+        | Thêm
+        input.form-control(type='text', name='golfer', id='golfer', placeholder='nhập tìm kiếm...', autocomplete="off")
+        ul.list-group.suggest-list
+    //- .form-group
+    //-   label.col-sm-3.control-label(for='member') Golfer tham gia
+    //-   .col-sm-7
+    //-     select.js-example-basic-multiple.col-sm-12(name='states[]', multiple='multiple')
+    //-       option(value='AL') Alabama
+    //-       |     ...
+    //-       option(value='WY') Wyoming
+    //- .form-group
+    //-   .col-sm-offset-3.col-sm-7
+    //-     button.btn.btn-success
+    //-       i.fa.fa-user-plus
+    //-       | Thêm
+
+    .form-group
+      .col-sm-12
         button.btn.btn-success(type='submit')
-          i.fa.fa-user-plus
-          | Signup
-  script(src='/js/lib/jquery.iframe-transport.js')
-  script(src='/js/lib/jquery.fileupload.js')
-  script.
-    jQuery(document).ready(function($){
-      $("input[name='myFile']").change(function() { 
-        var formData = new FormData('#myFile');
-        //- formData.append('section', 'general');
-        //- formData.append('action', 'previewImg');
-        //- formData.append('image', $("input[name='myFile']")[0].files[0]);
-        console.log(formData);
-        $.ajax({
-          url : '/api/upload',
-          type : 'POST',
-          data : $('#myFile').serialize(),
-          contentType: 'multipart/form-data',
-          async: true,
-          cache: false,
-          processData: false,  // tell jQuery not to process the data
-          contentType: false,  // tell jQuery not to set contentType
-          timeout: 60000,
-          success : function(data) {
-            console.log(data);
-          }
-        });
-      });      
-    });
+          i.fa.fa-plus-square-o
+          | Tạo trận đấu
+  script(src='https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js')
+  script
+    include createMatch.js
     
     
