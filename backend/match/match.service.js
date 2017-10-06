@@ -15,5 +15,9 @@ module.exports = {
 
   updateScore: (matchId, data, callback) => {
     return matchDAO.updateScore(matchId, data, callback);
+  },
+
+  getAll: (tournamentId, callback) => {
+    return matchDAO.getAll(tournamentId, callback);
   }
 }

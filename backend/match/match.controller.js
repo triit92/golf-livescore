@@ -83,5 +83,25 @@ module.exports = {
         return res.redirect('/match/create/' + tournamentId);
       });
     });
+  },
+
+  renderListMatch: (req, res) => {
+    let tournamentId = req.params.tournamentId;
+    tournamentService.getById(tournamentId, (err, tournament) => {
+      if(err){
+
+      }
+      if(!tournament){
+
+      }
+      //TODO check err and tournament not found
+      matchService.getAll(tournamentId, (err, results) => {
+        if(err){
+          //TODO hanfle error
+        }
+        res.render('match/listMatch', {list: results, tournamentId: tournamentId});
+      })
+    })
+    
   }
 }

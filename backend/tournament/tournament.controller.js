@@ -17,7 +17,7 @@ module.exports = {
       name: name,
       logo: logo,
       info: logo,
-      member: member
+      member: member.split(',')
     }
     tournamentService.createNewTournament(data, (err, result) => {
       console.log(err);
@@ -29,6 +29,18 @@ module.exports = {
       req.flash('success', { msg: 'Create new tournament successfully.' });
       return res.redirect('/tournament/create');
     });
+  },
 
+  renderListTournament: (req, res) => {
+    tournamentService.getAll((err, results) => {
+      if(err){
+        //TODO hanfle error
+      }
+      res.render('tournament/listTournament', {list: results});
+    })
+  },
+
+  renderScore: (req, res) => {
+    return res.render('tournament/score');
   }
 }

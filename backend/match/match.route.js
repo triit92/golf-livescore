@@ -8,6 +8,8 @@ router.get('/create/:tournamentId', matchController.renderCreate);
 
 router.get('/update-score/:matchId', matchController.renderUpdateScore);
 
+router.get('/list/:tournamentId', matchController.renderListMatch);
+
 router.post('/create/:tournamentId', matchController.createNewMatchInTournament);
 
 router.post('/update-score/:matchId', matchController.updateScore);

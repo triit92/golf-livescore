@@ -14,12 +14,14 @@
         li(class=(title === 'Home') ? 'active' : undefined)
           a(href='/') Home
         li(class=(title === 'API Examples') ? 'active' : undefined)
-          a(href='/api') API Examples
+          a(href='/golfer/create') Create Golfer
         li(class=(title === 'Contact') ? 'active' : undefined)
-          a(href='/contact') Contact
+          a(href='/tournament/create') Create Tournament
+        li(class=(title === 'Contact') ? 'active' : undefined)
+          a(href='/tournament/list') Tournament List
         li
           a(href='/status') Status
-      ul.nav.navbar-nav.navbar-right
+      //- ul.nav.navbar-nav.navbar-right
         if !user
           li(class=(title === 'Login') ? 'active' : undefined)
             a(href='/user/login') Login

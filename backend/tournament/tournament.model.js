@@ -6,7 +6,7 @@ const tournamentSchema = new mongoose.Schema({
   info: String,
   logo: String,
   baner: String,
-  match: [{type: mongoose.Schema.Types.ObjectId, ref: 'Match'}],     //array golferID
+  status: {type: Number, default: 1},
   member: [{type: mongoose.Schema.Types.ObjectId, ref: 'Golfer'}],     //array golferID
   // created_at: { type: Date, default: Date.now() },
   // updated_at: { type: Date, default: Date.now() }

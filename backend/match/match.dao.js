@@ -40,6 +40,17 @@ const matchDAO = {
         return callback(err);
       })
     })
+  },
+
+  getAll: (tournamentId, callback) => {
+    //TODO find with status 1
+    Match.find({tournament_id: tournamentId})
+    .sort({created_at: -1})
+    .limit(10)
+    .lean()
+    .exec((err, results) => {
+      return callback(err, results);
+    })
   }
 }
 

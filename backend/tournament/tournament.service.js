@@ -2,9 +2,12 @@ const tournamentDAO = require('./tournament.dao');
 
 module.exports = {
   getById: (tournamentId, callback) => {
-    tournamentDAO.getById(tournamentId, callback);
+    return tournamentDAO.getById(tournamentId, callback);
   },
   createNewTournament: (data, callback) => {
-    tournamentDAO.createNewTournament(data, callback);
+    return tournamentDAO.createNewTournament(data, callback);
+  },
+  getAll: (callback) => {
+    return tournamentDAO.getAll(callback);
   }
 }
