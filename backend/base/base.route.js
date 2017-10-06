@@ -7,6 +7,7 @@ const userRoute = require('../user/user.route');
 const golferRoute = require('../golfer/golfer.route');
 const matchRoute = require('../match/match.route');
 const tournamentRoute = require('../tournament/tournament.route');
+const teamRoute = require('../team/team.route');
 
 const publicGetRoute = require('./public.get.route');
 const publicPostRoute = require('./public.post.route');
@@ -41,5 +42,6 @@ module.exports = (app) => {
   app.use('/golfer', golferRoute);
   app.use('/match', matchRoute);
   app.use('/tournament', tournamentRoute);
+  app.use('/team', teamRoute);
   
 }

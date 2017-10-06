@@ -9,5 +9,12 @@ block content
 			.col-sm-6
 				h2= val.name
 				p= val.info 
+				h4
+					| Thể loai: 
+					if val.type == 1
+						|  Giải dấu
+					if val.typr == 2
+						|  Thi đấu
 				p
-					a.btn.btn-default(href='/match/list/' + val._id, role='button') View details »
+					a(href='/tournament/edit/' + val._id) Edit details »
+					a(href='/match/list/' + val._id) Match list »

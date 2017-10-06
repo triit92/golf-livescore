@@ -22,7 +22,7 @@ block content
   form.form-horizontal(id='signup-form', method='POST')
     input(type='text', name='_csrf', value=_csrf)
     input(type='hidden', name='userAvatar', value='')
-    input(type='hidden', name='member', value='')
+    
     .form-group
       label.col-sm-3.control-label(for='name') Tên trận đấu
       .col-sm-7
@@ -52,23 +52,16 @@ block content
 
     .form-group
       label.col-sm-3.control-label(for='member') Golfer tham gia
-      .col-sm-7
-        ul.list-group.member-list
-        | Thêm
-        input.form-control(type='text', name='golfer', id='golfer', placeholder='nhập tìm kiếm...', autocomplete="off")
-        ul.list-group.suggest-list
-    //- .form-group
-    //-   label.col-sm-3.control-label(for='member') Golfer tham gia
-    //-   .col-sm-7
-    //-     select.js-example-basic-multiple.col-sm-12(name='states[]', multiple='multiple')
-    //-       option(value='AL') Alabama
-    //-       |     ...
-    //-       option(value='WY') Wyoming
-    //- .form-group
-    //-   .col-sm-offset-3.col-sm-7
-    //-     button.btn.btn-success
-    //-       i.fa.fa-user-plus
-    //-       | Thêm
+
+    each team, index in tournament.team  
+      .form-group(id="form-"+team.team_id._id)
+        label.col-sm-3.control-label(for='member') #{team.team_id.name}
+        input(type='hidden', id='input-' + team.team_id._id, name='team', value='')
+        .col-sm-7
+          ul.list-group.member-list(id='list-' + team.team_id._id)
+          | Thêm
+          input.form-control(type='text', name='golfer', id=team.team_id._id, placeholder='nhập tìm kiếm...', autocomplete="off")
+          ul.list-group.suggest-list(id='suggest-' + team.team_id._id)
 
     .form-group
       .col-sm-12
