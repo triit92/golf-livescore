@@ -23,6 +23,19 @@ module.exports = {
     .exec((err, golfers) => {
       return callback(err, golfers);
     })
+  },
+
+  searchGolferInTeam: (name, arrayMember, limit, callback) => {
+    Golfer.find({
+      'name_searchable': new RegExp(name, 'i'),
+      '_id': {$in: arrayMember}
+    })
+    .where('status').equals(1)
+    .limit(limit)
+    .lean()
+    .exec((err, golfers) => {
+      return callback(err, golfers);
+    })
   }
 
 }

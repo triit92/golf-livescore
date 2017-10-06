@@ -6,8 +6,13 @@ const tournamentSchema = new mongoose.Schema({
   info: String,
   logo: String,
   baner: String,
+  type: {type: Number, require: true},    // 1: giai dau, 2: thi dau
   status: {type: Number, default: 1},
-  member: [{type: mongoose.Schema.Types.ObjectId, ref: 'Golfer'}],     //array golferID
+  team: [{
+    team_id: {type: mongoose.Schema.Types.ObjectId, ref: 'Team'},     //array golferID
+    score: Number
+  }]
+  
   // created_at: { type: Date, default: Date.now() },
   // updated_at: { type: Date, default: Date.now() }
 }, { timestamps: { 
@@ -16,14 +21,14 @@ const tournamentSchema = new mongoose.Schema({
   }
 });
 
-tournamentSchema.pre('save', function(next) {
-  var self = this;
+// tournamentSchema.pre('save', function(next) {
+//   var self = this;
 
-  var currentDate = Date.now();
-  this.updated_at = currentDate;
+//   var currentDate = Date.now();
+//   this.updated_at = currentDate;
 
-  return next();
-});
+//   return next();
+// });
 
 
 const Tournament = mongoose.model('Tournament', tournamentSchema);

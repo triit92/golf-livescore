@@ -10,5 +10,7 @@ router.get('/list', tournamentController.renderListTournament);
 
 router.get('/score/:slug', tournamentController.renderScore);
 
+router.get('/edit/:id', tournamentController.renderUpdate);
+
 router.post('/create', tournamentController.createNewTournament);
 module.exports = router;

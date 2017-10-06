@@ -3,7 +3,7 @@
  */
 
 'use strict'
-var DatabaseError = require('./database-error');
+var DatabaseError = require('./database.error');
 
 /**
  *

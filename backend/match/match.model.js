@@ -9,9 +9,10 @@ const matchSchema = new mongoose.Schema({
   type: { type: Number, default: 1, require: true},   // 1: normal 2: single match, 3: foursome
   golfer: [{
     golfer_id: { type: mongoose.Schema.Types.ObjectId, ref: 'Golfer', require: true},
-    team: { type: Number },
+    team_id: { type: mongoose.Schema.Types.ObjectId, ref: 'Team', require: true},
     result: [{ type: Number }]
-  }]
+  }],
+  status: {type: Number, default: 1}
 }, { timestamps: { 
   createdAt: 'created_at',
   updatedAt: 'updated_at' 

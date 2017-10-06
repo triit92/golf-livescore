@@ -9,15 +9,16 @@ module.exports = {
     let name = req.body.name;
     let logo = req.body.body;
     let info = req.body.info;
-    let member = req.body.member;
-
+    let team = req.body.teamArray;
+    let type = req.body.type;
     //TODO validate input
 
     let data = {
       name: name,
       logo: logo,
-      info: logo,
-      member: member.split(',')
+      info: info,
+      team: team.split(',').map(function(x){return {team_id: x}}),
+      type: type
     }
     tournamentService.createNewTournament(data, (err, result) => {
       console.log(err);
@@ -42,5 +43,18 @@ module.exports = {
 
   renderScore: (req, res) => {
     return res.render('tournament/score');
+  },
+
+  renderUpdate: (req, res) => {
+    let tournamentId = req.params.id;
+    tournamentService.getById(tournamentId, (err, result) => {
+      if(err){
+        //TODO handle error and return
+      }
+      if(!result){
+        // TODO handle and return err
+      }
+      return res.render('tournament/editTournament', {tournament: result});
+    })
   }
 }

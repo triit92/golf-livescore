@@ -43,5 +43,20 @@ module.exports = {
       }
       return res.json(results);
     })
+  },
+
+  searchGolferInTeam: (req, res) => {
+    let name = req.query.q;
+    let teamId = req.params.teamId;
+    console.log('--------------------');
+    console.log(name);
+    console.log(teamId);
+    // TODO validate name & teamid
+    golferService.searchGolferInTeam(name, teamId, 3, (err, result) => {
+      if(err){
+        console.log(err);
+      }
+      return res.json(result);
+    })
   }
 }

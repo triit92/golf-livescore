@@ -32,14 +32,6 @@ block content
 									td= match.golfer[index].result[indexScore]
 								else 
 									td= 0
-		if match.type && match.type > 1
-			each val, index in match.golfer
-				.form-group
-					label.col-sm-3.control-label(for='team')= val.golfer_id.name
-					.col-sm-12
-						select(name='team', id='team-select-' + val.golfer_id._id)
-							option(value='1') Team 1
-							option(value='2') Team 2
 	br
 	.row
 		.col-sm-12

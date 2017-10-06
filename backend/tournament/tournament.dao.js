@@ -7,6 +7,17 @@ module.exports = {
     })
   },
 
+  getByIdPopulateTeam: (tournamentId, callback) => {
+    Tournament.findById(tournamentId)
+      .populate([
+        {path: 'team.team_id', model: 'Team', select: '_id name info logo'}
+      ])
+      .lean()
+      .exec((err, tournament) => {
+        return callback(err, tournament);
+      })
+  },
+
   createNewTournament: (data, callback) => {
     let newTournament = new Tournament(data);
     newTournament.save((err) => {

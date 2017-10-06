@@ -6,7 +6,7 @@ module.exports = {
     let tournamentId = req.params.tournamentId;
     console.log("-------------------------- params");
     console.log(tournamentId);
-    tournamentService.getById(tournamentId, (err, result) => {
+    tournamentService.getByIdPopulateTeam(tournamentId, (err, result) => {
       console.log(result);
 
       //TODO check error and return 
@@ -50,16 +50,26 @@ module.exports = {
     let time = req.body.time;
     let teeTime = req.body.teeTime;
     let par = req.body.par;
-    let member = req.body.member;
+    let arrayTeamMember = req.body.team;
     let type = req.body.type;
 
+    
     //TODO validate input
     console.log("----------------------")
-    console.log(member);
+    console.log(req.body);
 
     tournamentService.getById(tournamentId, (err, result) => {
       console.log(result);
-
+      let golfer = [];
+      for(let i=0; i < arrayTeamMember.length; i++){
+        let memberInTeam = arrayTeamMember[i].split(',').map(golfer_id => {
+          return {
+            golfer_id: golfer_id,
+            team_id: result.team[i].team_id
+          }
+        });
+        golfer = golfer.concat(memberInTeam);
+      }
       //TODO check error and return 
       let parArray = par.split(',');
       let newMatch = {
@@ -68,10 +78,10 @@ module.exports = {
         time: new Date(time),
         tee_time: teeTime,
         par: parArray,
-        golfer: member.split(',').map((x) => {return { golfer_id: x}}),
+        golfer: golfer,
         tournament_id: tournamentId
       }
-
+      console.log(newMatch);
       matchService.createNewMatchInTournament(newMatch, (err, result) => {
         console.log(err);
         console.log(result);
