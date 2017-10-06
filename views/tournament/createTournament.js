@@ -19,7 +19,7 @@ jQuery(document).ready(function($){
       contentType: false,  // tell jQuery not to set contentType
       timeout: 60000,
       success : function(data) {
-        console.log(data);
+        //console.log(data);
         $("#golferAvar").attr("src","/uploads/" + data.filename);
         $('input[name=userAvatar]').val(data.filename);
       }
@@ -61,8 +61,9 @@ jQuery(document).ready(function($){
   $("input[name='golfer']").keyup(lazySearch);
 });
 
-function addGolferToMemberList(golfer){
+function addGolferToMemberList(golfer){ 
   let golferObj = JSON.parse(decodeURIComponent(golfer));
+  //console.log(golferObj);
   if(arrayMember.indexOf(golferObj._id) >= 0) return;
   arrayMember.push(golferObj._id);
   $('input[name=member]').val(arrayMember);
